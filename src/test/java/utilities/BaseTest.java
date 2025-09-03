@@ -2,12 +2,14 @@ package utilities;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.observer.ExtentObserver;
 import com.aventstack.extentreports.reporter.ExtentReporter;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import java.io.File;
@@ -77,8 +79,9 @@ public class BaseTest {
     }
 
     @AfterMethod
-    public void analyzeFailures(){
-        
+    public void analyzeFailures(ITestResult result) {
+        if (!result.isSuccess())
+            extentTest.log(Status.FAIL, "Test failed: " + result.getThrowable());
     }
 
     public WebDriver getWebDriver() {

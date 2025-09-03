@@ -29,7 +29,7 @@ public class TestReqResListApi extends BaseTest {
             info("Creating user: " + userName);
             manageApiObjects.getCreateUserApi().requestCreateUser(userName);
 
-            info("Verify is user is created successfully");
+            info("Verify user is created successfully");
             userCreated = manageApiObjects.getCreateUserApi().verifyUserCreated();
             Assert.assertTrue(userCreated, "Failed to create user. Response: "+manageApiObjects.getCreateUserApi().getResponse());
         }
